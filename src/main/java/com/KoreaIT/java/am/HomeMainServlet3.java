@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/home/printDan")
+@WebServlet("/home/printDan2")
 public class HomeMainServlet3 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -19,17 +19,17 @@ public class HomeMainServlet3 extends HttpServlet {
 		if (inputedDan == null) {
 			inputedDan = "1";
 		}
-		
+
 		String inputedLimit = request.getParameter("limit");
 
 		if (inputedLimit == null) {
 			inputedLimit = "9";
 		}
-		
+
 		String inputedColor = request.getParameter("color");
 
 		if (inputedColor == null) {
-			inputedColor = "black";
+			inputedColor = "";
 		}
 
 		int dan = Integer.parseInt(inputedDan);
@@ -37,7 +37,8 @@ public class HomeMainServlet3 extends HttpServlet {
 
 		response.getWriter().append(String.format("<div style=\"color:%s;\">%d단</div>", inputedColor, dan));
 		for (int i = 1; i <= limit; i++) {
-			response.getWriter().append(String.format("<div style=\"color:%s;\">%d * %d = %d</div>",inputedColor, dan, i, dan * i));
+			response.getWriter().append(
+					String.format("<div style=\"color:%s;\">%d * %d = %d</div>", inputedColor, dan, i, dan * i));
 		}
 	}
 }
