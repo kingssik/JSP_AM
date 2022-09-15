@@ -10,7 +10,7 @@
 <body>
 	<h1>메인 페이지</h1>
 	<div>
-		<a href="../article/list">게시물 리스트</a>
+		<a href="../JSP_AM/article/list">게시물 리스트</a>
 	</div>
 
 </body>
