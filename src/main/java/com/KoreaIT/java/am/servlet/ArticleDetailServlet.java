@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/article/detail")
 public class ArticleDetailServlet extends HttpServlet {
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -49,9 +49,9 @@ public class ArticleDetailServlet extends HttpServlet {
 			SecSql sql = SecSql.from("SELECT *");
 			sql.append("FROM article");
 			sql.append("WHERE id = ?", id);
-			
+
 			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
-			
+
 			request.setAttribute("articleRow", articleRow);
 			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
 
@@ -66,6 +66,12 @@ public class ArticleDetailServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

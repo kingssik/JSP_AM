@@ -49,4 +49,14 @@
     <servlet-name>MainPageServlet</servlet-name>
     <url-pattern>/MainPageServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>daf</display-name>
+    <servlet-name>daf</servlet-name>
+    <servlet-class>com.KoreaIT.java.am.servlet.daf</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>daf</servlet-name>
+    <url-pattern>/daf</url-pattern>
+  </servlet-mapping>
 </web-app>
