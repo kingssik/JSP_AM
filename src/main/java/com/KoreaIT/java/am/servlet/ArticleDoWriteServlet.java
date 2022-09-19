@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.KoreaIT.java.am.config.Config;
 import com.KoreaIT.java.am.util.DBUtil;
 import com.KoreaIT.java.am.util.SecSql;
 
@@ -29,7 +30,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 
 		Connection conn = null;
 
-		String driverName = "com.mysql.jdbc.Driver";
+		String driverName = Config.getDBDriverClassName();
 
 		try {
 			Class.forName(driverName);
@@ -41,7 +42,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		}
 
 		try {
-			conn = DriverManager.getConnection(url, user, password);
+			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
 
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
