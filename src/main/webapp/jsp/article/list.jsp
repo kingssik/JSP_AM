@@ -29,6 +29,7 @@ int totalPage = (int) request.getAttribute("totalPage");
 		<tr>
 			<th>번호</th>
 			<th>날짜</th>
+			<th>작성자</th>
 			<th>제목</th>
 			<th>수정</th>
 			<th>삭제</th>
