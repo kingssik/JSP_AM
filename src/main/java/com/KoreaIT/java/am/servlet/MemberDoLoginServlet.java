@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/doJoin")
-public class MemberDoJoinServlet extends HttpServlet {
+@WebServlet("/member/doLogin")
+public class MemberDoLoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -42,20 +42,21 @@ public class MemberDoJoinServlet extends HttpServlet {
 			conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUser(), Config.getDBPassword());
 
 			String loginId = request.getParameter("loginId");
-			String loginPw = request.getParameter("loginPw");
-			String name = request.getParameter("name");
 			
-			SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+			SecSql sql = SecSql.from("SELECT COUNT(*) > 0");
 			sql.append("FROM `member`");
 			sql.append("WHERE loginId = ?", loginId);
 
-			boolean isJoinAvailableLoginId = DBUtil.selectRowIntValue(conn, sql) == 0;
+			boolean isLoginIdDup = DBUtil.selectRowBooleanValue(conn, sql);
 
-			if (isJoinAvailableLoginId == false) {
+			if (isLoginIdDup) {
 				response.getWriter()
-				.append(String.format("<script>alert('%s는(은) 이미 사용중인 아이디입니다.'); location.replace('../member/join');</script>", loginId));
+				.append(String.format("<script>alert('%s는(은) 없는 아이디입니다.'); location.replace('../member/login');</script>", loginId));
 				return;
 			}
+			
+			String loginPw = request.getParameter("loginPw");
+			String name = request.getParameter("name");
 
 			sql = SecSql.from("INSERT INTO `member`");
 			sql.append("SET regDate = NOW()");
@@ -66,7 +67,7 @@ public class MemberDoJoinServlet extends HttpServlet {
 			int id = DBUtil.insert(conn, sql);
 
 			response.getWriter()
-					.append(String.format("<script>alert('%d번 회원이 가입 되었습니다.'); location.replace('../home/main');</script>", id));
+					.append(String.format("<script>alert('%d번 회원님 로그인 되었습니다.'); location.replace('../home/main');</script>", id));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
