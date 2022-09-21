@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
 Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("articleRow");
+Map<String, Object> memberRow = (Map<String, Object>) request.getAttribute("memberRow");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,8 +35,12 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 		<div>
 			내용 :
 			<textarea autocomplete="off" placeholder="내용을 입력해주세요" name="body"
-				type="text" /><%=(String) articleRow.get("body")%></textarea>
+				type="text" ><%=(String) articleRow.get("body")%></textarea>
 		</div>
+		<div>
+		 	작성자 :
+			<%=(String) memberRow.get("name")%></div>
+			
 		<div>
 			<button type="submit">수정</button>
 			<a href="list">리스트로 돌아가기</a>
