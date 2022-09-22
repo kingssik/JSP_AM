@@ -55,4 +55,12 @@ public class ArticleController {
 		request.setAttribute("articleRows", articleRows);
 		request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 	}
+
+	public void doWrite() {
+		
+	}
+	
+	public void doDelete() {
+		
+	}
 }
